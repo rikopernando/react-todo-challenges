@@ -1,0 +1,13 @@
+{
+  "todos" : {
+    "-K2ib4H77rj0LYewF7dP" : {
+      "judul" : "Belajar React Native",
+      "deskripsi" : "Belajar Mengenai Firebase, Redux & React Navigation"
+    },
+    "-K2ib5JHRbbL0NrztUfO" : {
+      "judul" : "Baca Al-Quran",
+      "deskripsi" : "Habis Shalat baca Al-Quran"
+    }
+  }
+}
+
