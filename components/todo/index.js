@@ -1,15 +1,22 @@
 import React from 'react'
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native'
-import * as firebase from 'firebase'
 import { Icon } from 'react-native-elements'
-
-const config = {
-    databaseURL: "https://todos-89ebb.firebaseio.com"
-}
-firebase.initializeApp(config)
-
+import * as firebase from 'firebase'
 
 export default class App extends React.Component {
+
+    static navigationOptions = ({navigation}) => {
+        return {
+            title : 'Todos App',
+            headerRight : (
+                <Button 
+                    onPress={navigation.getParam('signOut')}
+                    title='SignOut'
+                    color='black'
+                    />
+            )
+        }
+    }
 
   constructor(){
     super()
@@ -50,6 +57,24 @@ export default class App extends React.Component {
         const todos = snapshot.val()
         this.setState({ todos : todos, isLoading : false })
     })
+
+//    this.props.navigation.setParams({ signOut : this.signOut })
+
+    firebase.auth().onAuthStateChanged((user) => {
+        if(user) {
+            console.log(user)
+        }
+    })
+  }
+
+  signOut = () => {
+    firebase.auth().signOut()
+        .then(() => {
+            this.props.navigation.navigate('Login')
+        })
+        .catch((error) => {
+            console.log(error)
+        })
   }
 
   renderItem = ({item}) => {
